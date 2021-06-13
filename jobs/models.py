@@ -1,6 +1,7 @@
+from django.contrib.auth import get_user_model
 from django.db import models
 
-from accounts.models import User
+User = get_user_model()
 
 
 class MTOJobCategory(models.Model):
@@ -56,9 +57,7 @@ class MTORoles(models.Model):
         return self.description
 
 
-class MTOAdminUsers(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='admin_user')
-    full_name = models.CharField(max_length=100)
+class MTOAdminUser(User):
     varal_role_id = models.ForeignKey(MTORoles, on_delete=models.PROTECT)
 
     def __str__(self):
@@ -66,5 +65,8 @@ class MTOAdminUsers(models.Model):
 
     class Meta:
         verbose_name_plural = 'MTO Admin Users'
+
+    def save(self, *args, **kwargs):
+        super(MTOAdminUser, self).save(using='varal_job_posting_db')
 
 

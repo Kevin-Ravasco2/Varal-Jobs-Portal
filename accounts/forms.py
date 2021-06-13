@@ -1,8 +1,10 @@
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from django.forms import TextInput, EmailInput, PasswordInput
 from django import forms
 
 from accounts.models import MTO
+
+User = get_user_model()
 
 
 class SignUpForm(forms.Form):
@@ -25,15 +27,17 @@ class SignUpForm(forms.Form):
         return
 
     def save(self):
-        print('>>>>> the save method has been called')
         cleaned_data = super().clean()
         full_name = cleaned_data['full_name']
         email = cleaned_data['email']
         paypal_id = cleaned_data['paypal_id']
         password = cleaned_data['password']
 
-        user = User(email=email, username=email) # let us use email as username meanwhile
-        user.set_password(password)
-        user.save(using='vendor_os_db')
-        MTO.objects.create(full_name=full_name, paypal_id=paypal_id, user=user)
+        mto = MTO(full_name=full_name, email=email, paypal_id=paypal_id, username=email) # lets use email as username meanwhile
+        mto.set_password(password)
+        mto.save(using='vendor_os_db')
+        # user = User(email=email, username=email) # let us use email as username meanwhile
+        # user.set_password(password)
+        # user.save(using='vendor_os_db')
+        # MTO.objects.create(full_name=full_name, paypal_id=paypal_id, user=user)
         return
