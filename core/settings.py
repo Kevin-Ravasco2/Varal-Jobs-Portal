@@ -30,12 +30,13 @@ INSTALLED_APPS = [
     'accounts.apps.AccountsConfig',
     'jobs.apps.JobsConfig',
     'payments.apps.PaymentsConfig',
+    'users.apps.UsersConfig',
 
     # third party apps
     'widget_tweaks',
 ]
 
-AUTH_USER_MODEL = 'accounts.User'
+AUTH_USER_MODEL = 'users.User'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -112,7 +113,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-AUTHENTICATION_BACKENDS = ['accounts.backends.VaralOSDBAuthBackend', 'django.contrib.auth.backends.ModelBackend']
+AUTHENTICATION_BACKENDS = ['users.backends.VaralOSDBAuthBackend', 'django.contrib.auth.backends.ModelBackend']
 
 
 # Internationalization
