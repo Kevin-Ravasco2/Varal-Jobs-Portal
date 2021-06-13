@@ -1,15 +1,10 @@
-from django.contrib.auth.models import User
-from django.db import models
 
-
-# import autoslug
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 
 class User(AbstractUser):
-    # slug = autoslug.AutoSlugField(populate_from='email')
     full_name = models.CharField(max_length=100)
     is_mto = models.BooleanField(default=False, help_text="Means user can login to dean's portal")
     is_archived = models.BooleanField(default=False, help_text="Means User account has been deactivated")
@@ -46,8 +41,6 @@ class User(AbstractUser):
 
 
 class MTO(User):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='mto_user')
-    # full_name = models.CharField(max_length=100)
     paypal_id = models.CharField(max_length=100)
 
     def __str__(self):
