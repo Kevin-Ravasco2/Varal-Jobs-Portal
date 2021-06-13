@@ -58,11 +58,11 @@ class MTORoles(models.Model):
 
 class MTOAdminUsers(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='admin_user')
-    full_name = models.CharField(max_length=100)
+    # full_name = models.CharField(max_length=100)
     varal_role_id = models.ForeignKey(MTORoles, on_delete=models.PROTECT)
 
     def __str__(self):
-        return self.full_name
+        return self.user.full_name
 
     class Meta:
         verbose_name_plural = 'MTO Admin Users'

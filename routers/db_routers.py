@@ -1,7 +1,7 @@
 class VendorOSRouter:
     """
     A router to control all database operations on models in the
-    auth and jobs applications. This is related to vendorOS DB.
+    auth and accounts applications. This is related to vendorOS DB.
     """
     route_app_labels = {'auth', 'contenttypes', 'sessions', 'admin', 'accounts'}
 
