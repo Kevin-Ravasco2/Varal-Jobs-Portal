@@ -9,15 +9,9 @@ from django.utils.translation import gettext_lazy as _
 
 
 class User(AbstractUser):
-    # slug = autoslug.AutoSlugField(populate_from='email')
     full_name = models.CharField(max_length=100)
-    # is_staff = models.BooleanField(default=False, help_text="Used for super user authentications")
-    # is_superuser = models.BooleanField(default=False, help_text="Means user is admin")
     is_mto = models.BooleanField(default=False, help_text="Means user can login to dean's portal")
-    # is_active = models.BooleanField(default=True, help_text="Means user can login to the system")
     is_archived = models.BooleanField(default=False, help_text="Means User account has been deactivated")
-    # is_verified = models.BooleanField(default=False, help_text="Means email is valid")
-    # is_approved = models.BooleanField(default=False, help_text="Means that user has been approved")
     updated = models.DateTimeField(_('Updated'), auto_now=True, null=True,
                                    help_text="means last time table instance was edited")
     created = models.DateTimeField(_('Created'), auto_now_add=True, null=True,
@@ -51,8 +45,6 @@ class User(AbstractUser):
 
 
 class MTO(User):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='mto_user')
-    # full_name = models.CharField(max_length=100)
     paypal_id = models.CharField(max_length=100)
 
     def __str__(self):
