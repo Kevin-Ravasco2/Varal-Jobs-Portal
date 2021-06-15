@@ -4,6 +4,9 @@ from .models import MTO
 
 class MTOAdmin(admin.ModelAdmin):
     # A handy constant for the name of the alternate database.
+    list_display = ('full_name', 'username', 'email', 'paypal_id')
+    list_filter = ('is_active', )
+    search_fields = ('full_name', 'username', 'email',)
     using = 'vendor_os_db'
 
     def save_model(self, request, obj, form, change):
