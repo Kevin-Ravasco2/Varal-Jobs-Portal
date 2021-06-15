@@ -57,6 +57,10 @@ class MTORoles(models.Model):
         return self.description
 
 
+    def save(self, *args, **kwargs):
+        super(MTORoles, self).save(using='varal_job_posting_db')
+
+
 class MTOAdminUser(User):
     varal_role_id = models.ForeignKey(MTORoles, on_delete=models.PROTECT)
 

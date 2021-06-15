@@ -27,7 +27,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # my apps
-    'accounts.apps.AccountsConfig',
+    'user_accounts.apps.UserAccountsConfig',
     'jobs.apps.JobsConfig',
     'payments.apps.PaymentsConfig',
     'users.apps.UsersConfig',
@@ -87,7 +87,7 @@ DATABASES = {
     },
     'accounts_db': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'accounts.db.sqlite3',
+        'NAME': BASE_DIR / 'user_accounts.db.sqlite3',
     },
 
 }

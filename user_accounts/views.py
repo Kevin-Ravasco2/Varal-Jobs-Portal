@@ -3,8 +3,8 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views.generic.base import View
 
-from accounts.forms import SignUpForm
-from accounts.models import MTO
+from user_accounts.forms import SignUpForm
+from user_accounts.models import MTO
 
 
 class SignUpView(View):

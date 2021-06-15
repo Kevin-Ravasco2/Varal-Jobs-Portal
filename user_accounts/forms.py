@@ -2,7 +2,7 @@ from django.contrib.auth import get_user_model
 from django.forms import TextInput, EmailInput, PasswordInput
 from django import forms
 
-from accounts.models import MTO
+from user_accounts.models import MTO
 
 User = get_user_model()
 
