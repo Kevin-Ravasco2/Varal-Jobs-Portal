@@ -88,7 +88,7 @@ DATABASES = {
 
 }
 
-DATABASE_ROUTERS = ['routers.db_routers.VaralJobPostingDBRouter', 'routers.db_routers.VendorOSRouter',
+DATABASE_ROUTERS = ['routers.db_routers.VendorOSRouter', 'routers.db_routers.VaralJobPostingDBRouter',
                     'routers.db_routers.AccountsDBRouter']
 
 # Password validation

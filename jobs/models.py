@@ -1,9 +1,8 @@
-from django.contrib.auth import get_user_model
+# from django.contrib.auth import get_user_model
 from django.core.validators import MinValueValidator, RegexValidator
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-
-User = get_user_model()
+from users.models import User
 
 
 class MTOJobCategory(models.Model):
@@ -15,7 +14,7 @@ class MTOJobCategory(models.Model):
 
 class MicroTask(models.Model):
     job_name = models.CharField(max_length=300, help_text='e.g develop website')
-    cat_id = models.ForeignKey(MTOJobCategory, on_delete=models.SET_NULL, null=True)
+    cat_id = models.ForeignKey(MTOJobCategory, on_delete=models.CASCADE)
     target_date = models.DateTimeField(null=True, help_text='e.g 2021-10-25 14:30:59')
     job_cost = models.PositiveIntegerField(default=0, validators=[MinValueValidator(0)], help_text="currency AED")
     time_required = models.PositiveIntegerField(default=1, validators=[MinValueValidator(1)], )
@@ -76,6 +75,9 @@ class MTORoles(models.Model):
 
     def __str__(self):
         return self.description
+
+    def save(self, *args, **kwargs):
+        super(MTORoles, self).save(using='varal_job_posting_db')
 
 
 class MTOAdminUser(User):
