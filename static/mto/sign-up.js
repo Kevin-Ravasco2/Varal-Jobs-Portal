@@ -16,7 +16,7 @@ $(document).ready(function() {
                     success: function(response) {
                         console.log(response);
                         if(response['redirect']) {
-                         location.href = login
+                         location.href = response['redirect']
                         }
                         if(response['info']) {
                          $("#info").html(response['info']);

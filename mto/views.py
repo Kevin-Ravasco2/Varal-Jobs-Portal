@@ -32,7 +32,7 @@ class SignUpView(CreateView):
         user = form.save(commit=False)
         user.save()
         messages.success(self.request, f"Hi {user.full_name}, your account was created successfully.")
-        context = {'redirect': 'login'}
+        context = {'redirect': '/login'}
         return JsonResponse(context, status=200)
 
 # class SignUpView(View):
