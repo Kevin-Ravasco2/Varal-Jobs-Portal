@@ -3,6 +3,7 @@ from django.core.validators import MinValueValidator, RegexValidator
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from users.models import User
+from mto.models import MTO
 
 
 class MTOJobCategory(models.Model):
@@ -36,7 +37,7 @@ class EvaluationStatus(models.Model):
     description = models.ForeignKey(MicroTask, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.description
+        return self.description.job_name
 
 
 class MTOJob(models.Model):
@@ -50,6 +51,14 @@ class MTOJob(models.Model):
     completed_date = models.DateField()
     output_path = models.FileField()
     evaluation_status = models.ForeignKey(EvaluationStatus, on_delete=models.CASCADE)
+
+    @property
+    def mto(self):
+        mto = MTO.objects.filter(id=self.assigned_to).first()
+        return mto
+
+    def __str__(self):
+        return f"{self.job_id.job_name} :: {self.mto.full_name}"
 
 
 class MALRequirement(models.Model):
