@@ -3,7 +3,7 @@ class VendorOSRouter:
     A router to control all database operations on models in the
     auth and accounts applications. This is related to vendorOS DB.
     """
-    route_app_labels = {'users', 'auth', 'contenttypes', 'sessions', 'admin', 'accounts'}
+    route_app_labels = {'users', 'auth', 'contenttypes', 'sessions', 'admin', 'mto'}
 
     def db_for_read(self, model, **hints):
         if model._meta.app_label in self.route_app_labels:
@@ -65,7 +65,7 @@ class AccountsDBRouter:
     A router to control all database operations on models in the
     payments and accounts applications. This is related to Accounts DB.
     """
-    route_app_labels = {'payments'}
+    route_app_labels = {'accounts'}
 
     def db_for_read(self, model, **hints):
         if model._meta.app_label in self.route_app_labels:

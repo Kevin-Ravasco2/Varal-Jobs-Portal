@@ -4,7 +4,6 @@ from django.urls import reverse_lazy
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
@@ -14,8 +13,7 @@ SECRET_KEY = 'django-insecure-dun&%6s8phvfpb5o)-dz7l#!p*vy9&ligftj5kgq(m!*+qpet)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -29,9 +27,8 @@ INSTALLED_APPS = [
     # my apps
     'accounts.apps.AccountsConfig',
     'jobs.apps.JobsConfig',
-    'payments.apps.PaymentsConfig',
     'users.apps.UsersConfig',
-
+    'mto.apps.MtoConfig',
     # third party apps
     'widget_tweaks',
 ]
@@ -68,7 +65,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'core.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
@@ -92,8 +88,8 @@ DATABASES = {
 
 }
 
-DATABASE_ROUTERS = ['routers.db_routers.VaralJobPostingDBRouter', 'routers.db_routers.VendorOSRouter', 'routers.db_routers.AccountsDBRouter']
-
+DATABASE_ROUTERS = ['routers.db_routers.VaralJobPostingDBRouter', 'routers.db_routers.VendorOSRouter',
+                    'routers.db_routers.AccountsDBRouter']
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -115,7 +111,6 @@ AUTH_PASSWORD_VALIDATORS = [
 
 AUTHENTICATION_BACKENDS = ['users.backends.VaralOSDBAuthBackend', 'django.contrib.auth.backends.ModelBackend']
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
@@ -129,7 +124,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
@@ -139,14 +133,12 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 MEDIA_URL = '/images/'
 MEDIA_ROOT = BASE_DIR / "static/images"
 
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
 # auth settings
-LOGIN_URL = reverse_lazy("account_login")
+LOGIN_URL = reverse_lazy("mto:login")
 LOGOUT_REDIRECT_URL = LOGIN_URL
 LOGIN_REDIRECT_URL = "/"

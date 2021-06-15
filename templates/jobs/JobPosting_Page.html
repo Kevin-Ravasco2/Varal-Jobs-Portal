@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Job Posting Page</title>
+</head>
+<body>
+{% if not datas %}
+Login to view Microtasks and use following url <br> 'http://127.0.0.1:8000/posting/ "< Job_id >" '
+{% elif datas == "NA"%}
+Data Not Found
+{% else %}
+<div class="container" style="margin-left:300px;padding-top:50px">
+<label>
+    Name of the micro task : <strong>{{datas.job_name}} </strong><br><!--Name of the micro task--></label><br>
+<label>	
+    Category of the Microtask :<strong> {{datas.cat_id}}</strong> <br><!--Category of the Microtask--></label><br>
+<label>
+    Target date:<strong> {{datas.target_date | date:'d/m/Y'}}</strong> <br><!--Target date--></label><br>
+<label>
+    Job description :<strong> {{datas.job_description}}</strong> <br><!--Job description--></label><br>
+<label>
+    Upload job sample :<strong> {{datas.upload_job_sample}}</strong> <br><!--Upload job sample--></label><br>
+<label>
+    Upload Job instructions :<strong> {{datas.upload_job_instructions}}</strong> <br><!--Upload Job instructions--></label><br>
+<label>
+    Quantity of the Job :<strong> {{datas.Quantity_of_the_Job}}</strong> <br><!--Quantity of the Job--></label><br>
+<label>    
+	Job ID :<strong> {{datas.id}}</strong> <br><!--Job ID--></label><br>
+<label>    
+	Number of people required :<strong> {{datas.number_of_people_required}} </strong><br><!--No. of people required--></label><br>
+<label>    
+	Skills :<strong> {{datas.skills}}</strong> <br><!--Skills required--></label><br>
+<label>    
+	Job Cost in AED :<strong> {{datas.job_cost_AED}}</strong> <br><!--Cost to be paid--></label><br>
+</div>
+{% endif %}
+</body>
+</html>

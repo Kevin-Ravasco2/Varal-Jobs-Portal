@@ -8,7 +8,7 @@ def mto_required(function=None, redirect_field_name=REDIRECT_FIELD_NAME, login_u
     redirects to the MTO's log-in page if necessary.
     """
     actual_decorator = user_passes_test(
-        lambda u: u.is_active and u.is_mto and not u.is_archived,
+        lambda u: u.is_active and u.is_mto,
         login_url=login_url,
         redirect_field_name=redirect_field_name
     )
