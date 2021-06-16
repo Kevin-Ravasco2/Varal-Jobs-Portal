@@ -6,7 +6,7 @@ User = get_user_model()
 
 class VaralOSDBAuthBackend(BaseBackend):
     """
-    To authenticate users using also varal os db
+    To authenticate users using also vendor os db
     """
 
     def authenticate(self, request, username=None, password=None, **kwargs):

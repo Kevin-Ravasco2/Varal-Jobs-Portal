@@ -83,12 +83,12 @@ DATABASES = {
     },
     'accounts_db': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'user_accounts.db.sqlite3',
+        'NAME': BASE_DIR / 'accounts.db.sqlite3',
     },
 
 }
 
-DATABASE_ROUTERS = ['routers.db_routers.VaralJobPostingDBRouter', 'routers.db_routers.VendorOSRouter',
+DATABASE_ROUTERS = [ 'routers.db_routers.VendorOSRouter', 'routers.db_routers.VaralJobPostingDBRouter',
                     'routers.db_routers.AccountsDBRouter']
 
 # Password validation
