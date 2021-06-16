@@ -1,15 +1,16 @@
-from django.contrib.auth import get_user_model
 from django.db import models
 
-User = get_user_model()
 
-
-class MTO(User):
-    # user = models.OneToOneField(User, on_delete=models.CASCADE)
-    paypal_id = models.CharField(max_length=100)
+class MTOPaymentStatus(models.Model):
+    description = models.CharField(max_length=50)
 
     def __str__(self):
-        return self.full_name
+        return self.description
 
-    def save(self, *args, **kwargs):
-        super(MTO, self).save(using='vendor_os_db')
+
+class Payment(models.Model):
+    job_id = models.IntegerField(help_text='related to micro task')
+    assigned_to = models.IntegerField(help_text='related to MTO')
+    payment_id = models.IntegerField()
+    payment_date = models.DateField()
+    fees = models.FloatField()

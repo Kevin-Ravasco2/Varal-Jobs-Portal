@@ -29,10 +29,10 @@
               <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'account_signup' %}">Register</a>
+              <a class="nav-link" href="{% url 'mto:sign_up' %}">Register</a>
             </li>
           </ul>
-          <form class="form-inline mt-2 mt-md-0" method="post" action="{% url 'account_logout' %}">
+          <form class="form-inline mt-2 mt-md-0" method="post" action="{% url 'mto:logout' %}">
             {% csrf_token %}
             <button class="btn btn-outline-success btn-sm my-2 my-sm-0" type="submit">Logout</button>
           </form>

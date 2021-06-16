@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% block title %}MTO Login{% endblock title %}
 {% load widget_tweaks %}
 
 {% block content %}
@@ -33,7 +34,7 @@
 		{% endif %}
 
 		<div class="mt-4 text-center">
-			New to our platform? <a href="{% url 'account_signup' %}">Register</a>
+			New to our platform? <a href="{% url 'mto:sign_up' %}">Register</a>
 		</div>
 	</form>
 </div>
