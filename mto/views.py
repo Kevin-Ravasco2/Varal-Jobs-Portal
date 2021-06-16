@@ -6,6 +6,7 @@ from django.views.generic import CreateView
 # from django.views.generic.base import View
 #
 # from jobs.models import MALRequirement, MicroTask, MTOJobCategory
+from jobs.models import MTOJob
 from .forms import SignUpForm
 from .models import MTO
 
@@ -35,6 +36,7 @@ class SignUpView(CreateView):
         context = {'redirect': '/login'}
         return JsonResponse(context, status=200)
 
+
 # class SignUpView(View):
 #     template_name = 'mto/register.html'
 #
@@ -53,9 +55,11 @@ class SignUpView(CreateView):
 
 def dummy_home_view(request):
     mtos = MTO.objects.all()
+    jobs_applied = MTOJob.objects.all()
+    for job in jobs_applied:  # testing mto foreignkey
+        print(job.mto.full_name)
     context = {'mtos': mtos}
     return render(request, 'mto/index.html', context)
-
 
 # def microtask(request):
 #     if request.method == 'POST':
