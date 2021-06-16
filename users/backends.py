@@ -14,11 +14,12 @@ class VaralOSDBAuthBackend(BaseBackend):
             user = User.objects.using('vendor_os_db').get(username=username)
             return user if user.check_password(password) else None
         except User.DoesNotExist:
-            try:
-                user = User.objects.using('varal_job_posting_db').get(username=username)
-                return user if user.check_password(password) else None
-            except User.DoesNotExist:
-                return None
+            return None
+            # try:
+            #     user = User.objects.using('varal_job_posting_db').get(username=username)
+            #     return user if user.check_password(password) else None
+            # except User.DoesNotExist:
+            #     return None
 
     def get_user(self, user_id):
         """ Get a User object from the user_id. """
