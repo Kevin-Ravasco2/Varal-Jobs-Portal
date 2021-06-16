@@ -2,7 +2,6 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, Abstra
 from django.db import models
 
 
-
 class User(AbstractUser):
     full_name = models.CharField(max_length=100)
     is_mto = models.BooleanField(default=True) # by default the user is an MTO.
