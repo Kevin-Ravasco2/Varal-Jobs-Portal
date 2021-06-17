@@ -25,7 +25,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # my apps
-    'accounts.apps.AccountsConfig',
+    'user_accounts.apps.UserAccountsConfig',
     'jobs.apps.JobsConfig',
     'users.apps.UsersConfig',
     'mto.apps.MtoConfig',
@@ -88,7 +88,7 @@ DATABASES = {
 
 }
 
-DATABASE_ROUTERS = ['routers.db_routers.VendorOSRouter', 'routers.db_routers.VaralJobPostingDBRouter',
+DATABASE_ROUTERS = [ 'routers.db_routers.VendorOSRouter', 'routers.db_routers.VaralJobPostingDBRouter',
                     'routers.db_routers.AccountsDBRouter']
 
 # Password validation
