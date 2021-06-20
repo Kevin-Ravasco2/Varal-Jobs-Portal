@@ -1,8 +1,9 @@
+from django import forms
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
 # from django.forms import TextInput, EmailInput, PasswordInput
 # from django import forms
-
+from jobs.models import MTOJobCategory
 from .models import MTO
 
 User = get_user_model()
@@ -35,6 +36,22 @@ class SignUpForm(UserCreationForm):
         self.fields['password1'].widget.attrs['placeholder'] = 'Enter password'
         self.fields['password2'].widget.attrs['class'] = 'form-control'
         self.fields['password2'].widget.attrs['placeholder'] = 'Confirm password'
+
+
+job_categories = MTOJobCategory.objects.all()
+
+
+class MTOUpdateProfileForm(forms.ModelForm):
+    job_category = forms.ModelMultipleChoiceField(job_categories, widget=forms.SelectMultiple(attrs={'class': 'form-control'}))
+
+    class Meta:
+        model = MTO
+        fields = ['contact_number', 'location', 'paypal_id']
+        widgets = {
+            'contact_number': forms.NumberInput(attrs={'placeholder': 'Enter contact number', 'class': 'form-control'}),
+            'location': forms.TextInput(attrs={'placeholder': 'Enter Location', 'class': 'form-control'}),
+            'paypal_id': forms.TextInput(attrs={'placeholder': 'Enter PayPal ID', 'class': 'form-control'}),
+        }
 
 #
 #

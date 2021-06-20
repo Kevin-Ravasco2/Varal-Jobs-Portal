@@ -1,13 +1,19 @@
+import json
+
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse
+from django.utils.decorators import method_decorator
 from django.views.generic import CreateView
 # from django.views.generic.base import View
 #
 # from jobs.models import MALRequirement, MicroTask, MTOJobCategory
-from jobs.models import MTOJob
-from .forms import SignUpForm
+from django.views.generic.base import View
+
+from jobs.models import MTOJob, MTOJobCategory
+from .forms import SignUpForm, MTOUpdateProfileForm
 from .models import MTO
 
 
@@ -122,3 +128,39 @@ def dummy_home_view(request):
 #             data = "NA"
 #         return render(request,'JobPosting_Page.html', {'datas': data})
 #     return render(request,'JobPosting_Page.html')
+
+
+@method_decorator(login_required, name='dispatch')
+class MTOProfileView(View):
+    template_name = 'profile.html'
+    context_object_name = 'mto'
+    form = MTOUpdateProfileForm
+
+    def get(self, *args, **kwargs):
+        mto = MTO.objects.get(id=self.request.user.id)
+        self.form = MTOUpdateProfileForm(instance=mto)
+
+        # we get the items from string type to list type and get the users job categories
+        jsonDec = json.decoder.JSONDecoder()
+        mto_preferred_categories = jsonDec.decode(mto.job_category)
+        job_categories = [MTOJobCategory.objects.get(id=job_id) for job_id in mto_preferred_categories]
+
+        context = {self.context_object_name: mto, 'form': self.form, 'job_categories': job_categories}
+        return render(self.request, self.template_name, context)
+
+    def post(self, *args, **kwargs):
+        form = self.form(self.request.POST)
+        if form.is_valid():
+            phone = form.cleaned_data['contact_number']
+            location = form.cleaned_data['location']
+            paypal = form.cleaned_data['paypal_id']
+
+            # convert the job categories to a list then save them as a JSON string in the database.
+            job_categories = form.cleaned_data['job_category']
+            job_categories_ids = json.dumps([job.id for job in job_categories])
+
+            # update our fields in the database
+            MTO.objects.filter(id=self.request.user.id).update(contact_number=phone, location=location,
+                                                               job_category=job_categories_ids, paypal_id=paypal)
+            messages.success(self.request, 'Changes saved successfully')
+        return redirect(reverse('mto:profile'))

@@ -33,5 +33,6 @@ User = get_user_model()
 #     )
 #
 #
-# admin.site.register(User, UserAdmin)
+
+admin.site.register(User)
 

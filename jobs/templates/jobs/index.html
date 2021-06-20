@@ -33,7 +33,7 @@
               <a class="nav-link" href="{% url 'mto:login' %}">Mto-SignUp/Login</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#}">Varal Admin SignUp</a>
+              <a class="nav-link" href="{% url 'admin_login' %}">Varal Admin Login</a>
             </li>
             {% endif %}
           </ul>
@@ -53,6 +53,7 @@
 			<div class="card-body">
 				<h4 class="mt-5">This is MTOJob table data</h4>
 				<p>you can use the admin to populate MTOJob table</p>
+				<p>The Authenticated user is {{ request.user.username }}, is mto: {{ request.user.is_mto }}</p>
 			</div>
 		</div>
         <div class="card">
