@@ -88,7 +88,7 @@ DATABASES = {
 
 }
 
-DATABASE_ROUTERS = ['routers.db_routers.VendorOSRouter', 'routers.db_routers.VaralJobPostingDBRouter',
+DATABASE_ROUTERS = [ 'routers.db_routers.VaralJobPostingDBRouter', 'routers.db_routers.VendorOSRouter',
                     'routers.db_routers.AccountsDBRouter']
 
 # Password validation
@@ -140,5 +140,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # auth settings
 LOGIN_URL = reverse_lazy("mto:login")
-LOGOUT_REDIRECT_URL = LOGIN_URL
+LOGOUT_REDIRECT_URL = "/"
 LOGIN_REDIRECT_URL = "/"

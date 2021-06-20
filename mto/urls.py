@@ -8,6 +8,6 @@ urlpatterns = [
 
     # authentication patterns
     path('register/', SignUpView.as_view(), name='sign_up'),
-    path('login/', LoginView.as_view(template_name='mto/login.html'), name='login'),
+    path('login/', LoginView.as_view(template_name='mto/login.html', success_url='mto/'), name='login'),
     path('logout/', LogoutView.as_view(), name='logout'),
 ]

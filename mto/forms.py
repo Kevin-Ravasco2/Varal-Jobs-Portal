@@ -12,26 +12,26 @@ User = get_user_model()
 class SignUpForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         model = MTO
-        fields = ['username', 'full_name', 'email', 'paypal_id', 'password1', 'password2']
+        fields = ['username', 'full_name', 'email', 'paypal_id', 'contact_number', 'location', 'password1', 'password2']
+        widgets = {
+            'username': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter username'}),
+            'full_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'First Middle Last'}),
+            'email': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Enter email'}),
+            'paypal_id': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter PayPal ID'}),
+            'contact_number': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter Phone number'}),
+            'location': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter location'}),
+        }
 
     def save(self, commit=True):
         user = super().save(commit=False)
         user.is_mto = True
         user.is_active = True
-        user.save()
+        user.save(using='vendor_os_db')
         return user
 
     def __init__(self, *args, **kwargs):
         super(SignUpForm, self).__init__(*args, **kwargs)
 
-        self.fields['full_name'].widget.attrs['class'] = 'form-control'
-        self.fields['full_name'].widget.attrs['placeholder'] = 'first middle last'
-        self.fields['username'].widget.attrs['class'] = 'form-control'
-        self.fields['username'].widget.attrs['placeholder'] = 'Enter username'
-        self.fields['email'].widget.attrs['class'] = 'form-control'
-        self.fields['email'].widget.attrs['placeholder'] = 'Enter email'
-        self.fields['paypal_id'].widget.attrs['class'] = 'form-control'
-        self.fields['paypal_id'].widget.attrs['placeholder'] = 'Enter paypal ID'
         self.fields['password1'].widget.attrs['class'] = 'form-control'
         self.fields['password1'].widget.attrs['placeholder'] = 'Enter password'
         self.fields['password2'].widget.attrs['class'] = 'form-control'

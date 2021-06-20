@@ -32,6 +32,18 @@
 		</div>
 
 		<div class="form-group">
+			<label>Phone</label>
+			{{ form.contact_number }}
+			<div id="error-contact-id" class="text-danger"></div>
+		</div>
+
+		<div class="form-group">
+			<label>Location</label>
+			{{ form.location }}
+			<div id="error-location-id" class="text-danger"></div>
+		</div>
+
+		<div class="form-group">
 			<label>Password</label>
 			{{ form.password1 }}
 			<div id="error-password1" class="text-danger"></div>
